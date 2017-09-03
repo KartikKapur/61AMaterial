@@ -1,0 +1,50 @@
+\ProvidesPackage{header}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{fancybox}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[colorlinks]{hyperref}
+\usepackage{import}
+\usepackage{listings}
+\usepackage{paralist}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{upquote}
+\usepackage{verbatim}
+\usepackage{wasysym}
+\usepackage{tikz,tikz-qtree,tikz-qtree-compat}
+
+% Course information
+\def\coursenumber{CSM 61B}
+\def\semester{Fall 2017}
+
+% Provide discnum and disctitle
+\newcommand{\discnumber}[1]{\newcommand{\discnum}{#1}}
+\def\title#1{\gdef\@title{#1}\gdef\disctitle{#1}}
+
+\pagestyle{head}
+\runningheader{
+ \oddeven{}{\thepage \quad \textit{\disctitle}}}
+ {}
+ {\oddeven{\textit{\disctitle} \quad \thepage}{}
+}
+
+\renewcommand{\maketitle}{\@maketitle\thispagestyle{empty}}
+\def\@maketitle{
+ \newpage
+ \vspace*{-\topskip}
+ \hrule height1pt width\textwidth
+ \vskip 0.25em
+ \makebox[1.6in][l]{\dunhb \coursenumber}
+ {\dunhb \hfill \disctitle}
+ \vskip 0em
+ \makebox[1.6in][l]{\dunhb \semester}
+ {\dunhb \hfill \dunhs \ifdefined\discnum Mentoring \discnum: \fi\@date}
+ \vskip 0.75em
+ \hrule height1pt width\textwidth \par \vskip 0.5em
+}
