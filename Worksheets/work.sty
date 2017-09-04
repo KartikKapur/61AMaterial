@@ -3,6 +3,8 @@
 
 \usepackage{amsmath,textcomp}
 \usepackage{enumitem}
+\RequirePackage[nobreak=true]{mdframed}
+
 
 \def\coursenumber{CS 61A CSM}
 \def\class{The Structure and Interpretation of Computer Programs}
@@ -92,3 +94,8 @@
 \setlist[subq,1]{label = (\alph*)}
 \newcommand{\subqs}{\item}
  \newcommand{\Question}[1]{\section{#1}}
+   \newenvironment{solution}{\begin{mdframed}\begin{mdframed}[linecolor = white] \textbf{Solution}:
+    }{\end{mdframed}\end{mdframed}}
+    
+
+    
