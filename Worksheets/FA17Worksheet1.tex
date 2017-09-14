@@ -17,7 +17,7 @@ numbers = left,
 \begin{document}
 \maketitle
 \section{Introduction}
-This worksheet will serve as a brief review of everything that has occurred in CS61A over the last few weeks. It is not comprehensive, but it should provide the high level overview that is required to gain intuition for most problems
+This worksheet will serve as a brief review of everything that has occurred in CS61A over the last few weeks. It is not comprehensive, but it should provide the high level overview that is required to gain intuition for most problems.
 \section{Functions}
 \textbf{Functions}, in the most basic sense, are a block of code, that can be used to perform some type of action. Functions have multiple uses, and can be used as return values, nested definitions, and arguments. 
 
@@ -37,7 +37,7 @@ def eatFood(makeFood):
      makeFood()
      print("I have eaten!")
 \end{lstlisting}
-Here we have a function \emph{eatFood}. In this, we have an argument, \emph{makeFood}. We call the function \emph{makeFood} and then say that we have eaten. Depending on the food that we want to eat, we will have a different method to make it. However, regardless of how we make the food, we will eat it the same way, with our mouths! So instead of making a new function for eating every type of food, we have a function for eating that takes in a function that makes our food, allowing us to make a more universal function. 
+Here we have a function \emph{eatFood}. In this, we have an argument, \emph{makeFood}. We call the function \emph{makeFood} and then say that "I have eaten!". Depending on the food that we want to eat, we will have a different method to make it. However, regardless of how we make the food, we will eat it the same way- with our mouths! Instead of making a new function for eating every type of food, we have a function for eating. This function takes in a function that makes our food, which makes a more universal function. 
 \subsection{Returning Functions}
 Say we wanted to make a function that allows us to eat cook some food given 1 ingredient and a set amount of time. At runtime, our function would take in a "mystery ingredient" and we would compare all the foods 
 \begin{lstlisting}[language = Python]
@@ -45,7 +45,7 @@ func1 = makeFood(ravioli, x, 2)
 func2 = makeFood(ice cream, x, 2)
 func3 = makeFood(ravioli, x, 2211)
 \end{lstlisting}
-You can see why this can get a bit tiring, so instead of doing this, we can have return a function. For the above example, we can make a function that takes in 3 arguments, the 2 food items, and the amount of time you want it to cook so that it looks as follows: 
+You can see why this can get a bit tiring, so instead of doing this, we can return a function. For the above example, we can make a function that takes in 3 arguments, the 2 food items, and the amount of time you want to cook them for. This looks as follows: 
 \begin{lstlisting}[language = Python]
 def checkFood(food1, time):
      return makeFood(food1, mystery, time)
@@ -58,7 +58,7 @@ func3 = checkFood(ravioli, 2211)
 \end{lstlisting}
 The change isn't too obvious in this scenario; however, in times when you want some similar construction with different inputs (the x value), this process can save a lot of time. An example will come up when we deal with Nested Functions.
 \subsection{Nested Functions}
-Now that we have dealt with Functions as return values and arguments, we will now deal with functions within functions. This concept can seem a bit overwhelming, but I promise, it will get a bit easier. Nested functions allow us to not have all methods public to the global frame and also allows us to use the output of a specific function as the only possible input for a function. 
+Now that we have dealt with functions as return values and arguments, we will now deal with functions within functions. This concept can seem a bit overwhelming, but I promise, it will get a bit easier. Nested functions allow us to not have all the methods public to the global frame and it allows us to use the output of a specific function as the only possible input for a function. 
 \begin{lstlisting}[language = Python]
 def makeRavioli(time):
      def putSauce(flavor):
@@ -68,7 +68,7 @@ def makeRavioli(time):
 \end{lstlisting}
 Here we have a nested definition of \emph{putSauce}. We would not want people to put sauce on brownies, so it makes sense that this function would be within the \emph{makeRavioli} function. Additionally, if someone had some other pasta, they may want to have a \emph{putSauce} method that acts differently. Having nested definitions allows us to have methods with the same name and purpose that have different functionality.
 \section{Recursion}
-You are in a theater and want to know how many rows are in front of you but you can only see 1 row in front of you. To solve this problem, you ask person in front of you “how many people are in front of you?”. Te asks the person in front of them and this continues until reaching the guy at the first row, they respond “0” to the person in the 2nd row. The person in the 2nd row knows there are 0 rows in the row in front of him, so he adds 1 to 0, 1, and tells guy behind him. That guy adds 1 to 1, 2, and tells guy behind him. Process repeats until it’s back to you (you add 1 to the amount given by person in front). This process is a real life application of the concept of \emph{recursion}. \\*
+You are in a theater and want to know how many rows are in front of you but you can only see 1 row in front of you. To solve this problem, you ask the person in front of you “how many people are in front of you?”. They ask the person in front of them and this continues until reaching the person in the first row, they respond “0” to the person in the 2nd row. The person in the 2nd row knows there are 0 rows in the row in front of him, so he adds 1 to 0, 1, and tells guy behind him. That guy adds 1 to 1, 2, and tells guy behind him. This process repeats until you get back a number. This process is a real life application of the concept of \emph{recursion}. \\*
 \bigskip
 Recursion, in the most basic sense, is a function that calls itself, or other functions, and each time it does this, it simplifies the input problem until, it it simple enough to be solve trivially. Recursive algorithms consist of 2 main parts, the base case(s) and the the recursive call. A \emph{base case} is a conditional statement that that terminates the algorithm when invoked. The \emph{recursive step} is the call to the function that has a reduced input in order to solve the problem.
 \begin{lstlisting}[language = Python]
@@ -109,7 +109,7 @@ This process is equivalent to the following environment diagrams  \\*
 \includegraphics[scale=.6]{../images/frame1.png}{\Huge $\rightarrow$}\includegraphics[scale=.6]{../images/frame2.png} {\Huge $\rightarrow$} \includegraphics[scale=.6]{../images/frame3.png} \\*
 Note that the first frame is for the return value of \emph{sumSquares(1)}, the 2nd for \emph{sumSquares(2)}, and the 3rd for \emph{sumSquares(3)}.
 \subsection{Tree Recursion}
-Tree Recursion is a function that calls itself more than once. For example: 
+Tree Recursion is the process when a function that calls itself more than once during one step. For example: 
 \begin{lstlisting}[language = Python]
 def walkSteps(n):
      if(n <= 2):
@@ -181,8 +181,8 @@ This would run properly; however, if you wanted to change the value of energy, y
 energy = 10
 def work(x):
      x--
-     lreturn x
-energy = work()
+     return x
+energy = work(energy)
 \end{lstlisting}
 Here we can modify the energy variable by setting it equal to the result of the work method. 
 \begin{lstlisting}[language = Python]
@@ -196,6 +196,44 @@ The last rule is the one that most people consider a bit more confusing. \\* \bi
 
 \includegraphics[scale=.7]{../images/funcy1.png}{\Huge $\rightarrow$}\includegraphics[scale=.7]{../images/funcy2.png} \\* \bigskip
 In the above function, we have a lambda function that is defined in the global frame. We then pass it into out function \emph{funcy} and attempt to evaluate it. We pass in the value 2 as the argument for z; however, when it comes to choosing the value for x, \textbf{we do not go to the frame that the function was evaluated in, instead we pick the value of x based off where the function was defined}. If x was not defined in the global frame, there would be an error. 
+\section{Misc.}
+Here I will discuss miscellaneous categories that are in the first unit of CS61A that tend to be a bit tricky
+\subsection{Lambda Functions}
+Lambda function are a concise way to write definition statements.
+\begin{lstlisting}[language = Python]
+def func1(x):
+     return 10
+\end{lstlisting}
+The above example is equivalent to 
+\begin{lstlisting}[language = Python]
+lambda x : 10
+\end{lstlisting}
+Realize that there is a 1 to 1 correspondence between lambda function and def statements. Rewriting lambda's in a much more well known form can really aid in the understanding of these types of problems.
+
+\subsection{The Print Function}
+The print function is one that is really unique. It displays something to the user output; however, the value of a print is always None. For example: 
+\begin{lstlisting}[language = Python]
+def print10():
+     x = print(10)
+     return x
+\end{lstlisting}
+This function would first print 10 then bound x to the return value of the print statement. This is always None, regardless of the input to the print function.
+\\* 
+\bigskip
+Additionally, returning and printing a string would yield different outputs. Printing a string would always result in the said string having no quotes around it; however, if you returned a string, there would be quotes around it. For example: 
+\begin{lstlisting}[language = Python]
+def returnStr():
+     return "hello"
+returnStr()
+\end{lstlisting}
+returns 'hello'. While 
+\begin{lstlisting}[language = Python]
+def printStr():
+     print "hello"
+printStr()
+\end{lstlisting}
+prints hello. You do not really need to know why this occurs, but it is an interesting fact to keep in mind. \\*
+
 \newpage
 \Question{Butter Nutter}
 \begin{subq}
@@ -211,6 +249,42 @@ In the above function, we have a lambda function that is defined in the global f
  \begin{solution}
  strawberrycrunchy
  \end{solution}
+\end{subq}
+\Question{Goats and Lambs}
+\begin{subq}
+\subqs Lambdas are very niche functions. They are used to write short, one line def statements.  Write the following lambda statement as a normal def statement function. lambda x:  lambda y : lambda z: x + y + 1
+\begin{solution}
+\begin{lstlisting}[language = Python]
+def func1(x):
+     def func2(y):
+          def func3(z):
+                return x + y + 1
+          return func3
+     return func(2)
+\end{lstlisting}\end{solution}
+
+\subqs Write the following function as a lambda: 
+\begin{lstlisting}[language = Python]
+def fib(n):
+     if(n < =1):
+          return n
+     else:
+          return fib(n-1)+ fib(n-2)
+\end{lstlisting}
+\begin{solution}
+fib = lambda n: n if n $<=$1 else fib(n-1)+fib(n-2)
+
+\end{solution}
+\subqs Within 4 lines create a function or set of functions that do the following: 
+You are given an integer input. If n, the number of digits, in the integer is odd find n factorial. Otherwise, find the nth fibonacci number
+\begin{solution}
+\begin{lstlisting}[language = Python]
+dig = lambda x: 1 if x < 10 else 1 + dig(x//10)
+fib = lambda x: x if x <=2 else fib(x-1) + fib(x-2)
+fact = lambda x : 1 if x<=1 else x*factorial(x-1)
+func1 = lambda x: fib(dig(x)) if dig(x)%2 == 0 else fact(dig(x))
+\end{lstlisting}
+\end{solution}
 \end{subq}
 \newpage
 
