@@ -232,10 +232,112 @@ def printStr():
      print "hello"
 printStr()
 \end{lstlisting}
-prints hello. You do not really need to know why this occurs, but it is an interesting fact to keep in mind. \\*
+prints hello. You do not really need to know why this occurs, but it is an interesting fact to keep in mind. 
+\subsection{Short circuiting}
+When evaluating conditional we can utilize a concept called \emph{short circuiting}. That is, if one condition would automatically set the return value for the conditional, we do not need to continue evaluating. \\*
+\bigskip
+For and statements, we check to see if something is true and the next statement is true. This means that, for the statement to be true, everything needs to evaluate to true. If there is even one false value, then the statement would evaluate to false. \\*
+\begin{lstlisting}[language = Python]
+if(1==2 and true):
+    print("troe")
+\end{lstlisting}
+We know that 1 does not equal 2, so we can short circuit and evaluate our conditional statement to false. We do not need to even consider anything after this statement, because nothing added on would make this statement true.
+\\*
+\bigskip
+For or statements, we are only looking for 1 true condition. So if any condition evaluates to true, we can automatically stop evaluating other expressions in the conditional. 
+\begin{lstlisting}[language = Python]
+if(1==1 or 1/0):
+    print("hiya")
+\end{lstlisting}
+In this case, we would print hiya, because 1 equals 1. We no longer need to evaluate the rest of our function, because we know that no expression's value could make this expression false. The error that would be created from evaluating 1/0 does not matter because 1/0 is never evaluated in the conditional.
+\newpage
+\Question{Questions}
+\subsection{Butter Nutter}
+\begin{subq}
+ \subqs Label the parts of the following function: 
+ \lstinputlisting[language=Python, firstline=1, lastline=11]{../code/environments.py}
+  \bigskip
+ 
+ \subqs What does the above code snippit return? 
+\bigskip
+
+\bigskip
+\end{subq}
+\subsection{Goats and Lambs}
+\begin{subq}
+\subqs Write the following lambda statement as a normal def statement function. lambda x:  lambda y : lambda z: x + y + 1
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subqs Write the following function as a lambda: 
+\begin{lstlisting}[language = Python]
+def fib(n):
+     if(n < =1):
+          return n
+     else:
+          return fib(n-1)+ fib(n-2)
+\end{lstlisting}
+\newpage
+
+\subqs Within 4 lines create a function or set of functions that do the following: 
+You are given an integer input. If n, the number of digits, in the integer is odd find n factorial. Otherwise, find the nth fibonacci number
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\end{subq}
+\subsection{Narcissistic Kartik}
+\begin{subq}
+\subqs Create an environment diagram for the following code:
+\begin{lstlisting}[language = Python]
+karty, party,marty = 5, 10,15
+def kart(ik):
+    kart = ik(marty)
+    while kart:
+        def ik():
+            return lambda kario, mart: 10
+        party = kart
+        kart = (True == 6)
+    return ik()(karty, party)
+karty = lambda karty: karty + kart(lambda kar:10+kar)
+karty = karty(party)
+\end{lstlisting}
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\end{subq}
+\subsection{Two's blues}
+You are give some number n that is  a power of 2 and you want count all the ways you can get to 1 by dividing it by powers of 2 that up to and including it. For example, 8 can get to 1 in 4 total ways, divide 8 by 8, divide 8 by 4, then divide the result by 2, divide 8 by 2 then by 4 and divide 8 by 2 then 2 then 2 again.
 
 \newpage
-\Question{Butter Nutter}
+
+\section{Solutions}
+\subsection{Butter Nutter}
 \begin{subq}
  \subqs Label the parts of the following function: 
  \lstinputlisting[language=Python, firstline=1, lastline=11]{../code/environments.py}
@@ -250,7 +352,7 @@ prints hello. You do not really need to know why this occurs, but it is an inter
  strawberrycrunchy
  \end{solution}
 \end{subq}
-\Question{Goats and Lambs}
+\subsection{Goats and Lambs}
 \begin{subq}
 \subqs Lambdas are very niche functions. They are used to write short, one line def statements.  Write the following lambda statement as a normal def statement function. lambda x:  lambda y : lambda z: x + y + 1
 \begin{solution}
@@ -262,7 +364,7 @@ def func1(x):
           return func3
      return func(2)
 \end{lstlisting}\end{solution}
-
+\newpage
 \subqs Write the following function as a lambda: 
 \begin{lstlisting}[language = Python]
 def fib(n):
@@ -286,6 +388,42 @@ func1 = lambda x: fib(dig(x)) if dig(x)%2 == 0 else fact(dig(x))
 \end{lstlisting}
 \end{solution}
 \end{subq}
+\subsection{Narcissistic Kartik}
+\begin{subq}
+\subqs Create an environment diagram for the following code:
+\begin{lstlisting}[language = Python]
+karty, party,marty = 5, 10,15
+def kart(ik):
+    kart = ik(marty)
+    while kart:
+        def ik():
+            return lambda kario, mart: 10
+        party = kart
+        kart = (True == 6)
+    return ik()(karty, party)
+karty = lambda karty: karty + kart(lambda kar:10+kar)
+karty = karty(party)
+\end{lstlisting}
+\begin{solution}
+\\* \includegraphics[scale=.5]{../images/kartik.png}
+\end{solution}
+\end{subq}
+\subsection{Two's blues}
+You are give some number n that is  a power of 2 and you want count all the ways you can get to 1 by dividing it by powers of 2 that up to and including it. For example, 8 can get to 1 in 4 total ways, divide 8 by 8, divide 8 by 4, then divide the result by 2, divide 8 by 2 then by 4 and divide 8 by 2 then 2 then 2 again.
+\begin{solution}
+\begin{lstlisting}[language = Python]
+def twos(n):
+    if(n<=1):
+        return 1
+    power_of_two= 2
+    total = 0
+    while(power_of_two <=n):
+        total += twos(n/power_of_two)
+        power_of_two *= 2
+    return total
+\end{lstlisting}
+\end{solution}
+
 \newpage
 
 
