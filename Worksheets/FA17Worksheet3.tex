@@ -5,7 +5,7 @@
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning}  
 \usepackage{amsmath}
-\def\title{Objects and Orders of Growth}
+\def\title{Trees and Orders of Growth}
 \lstset{ 
 numbers = left,
   stepnumber=1,
@@ -64,6 +64,9 @@ We noted that our process of constructing a tree seems to be recursive in nature
 return [func_name(child) for child in tree.branches]
 \end{lstlisting}
 Basically what the above for loop does is return a new list that has the return values for all the nodes is a tree. This process tends to be used when we are constructing a new tree from our current values and simply want to do something to them (or if we want to loop over our tree for whatever reason).
+\\*
+\bigskip
+For most tree problems, it is important to see if we are trying to make a new tree or modify the same tree. If we are trying to modify the same tree you would tend to want to use a normal for loop and modify values like that. If you want to construct a new tree then you can use a list comprehension. But regardless of the situation, we usually want to go through all the branches, which means somehow looping over them.
 \section{Growth}
 When writing programs, it is vital that we keep track of how fast our program runs. Working with slow, inefficient code can make your life very hard- to avoid that, we will start by learning how to analyze code. \\* \bigskip
 First, we need to go over some basic rules for find the runtime of a function. 
@@ -100,6 +103,99 @@ def fun(n):
 	     n-=1
 	return fun(count-1)
 \end{lstlisting}
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Liebonacci}
+The basic fibonacci code is written as follows: 
+\begin{lstlisting}[language = Python]
+def fib(n):
+	if(n <= 2):
+	     return n
+	return fib(n-1)+fib(n-2)
+\end{lstlisting}
+However, this code is very inefficient, it runs in $\Theta(2^{n})$ time. Write a better version of fibonacci that can run in linear time. You can use any exterior variables,arguments, or methods. 
+This solution uses a technique called caching. Instead of throwing away the data you've used, you store it. This way, you have a significantly less number of calls to your function.
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{FibTree}
+As you can tell, we are obsessed with the Fibonacci sequence. As a result, we will attempt to create a Fibonacci tree as follows: \\*
+\bigskip
+The argument passed in will be n, which refers to the nth fibonacci number. We want each number below a node to be the two numbers that compose it. For example, for n = 4 we have \\*
+\includegraphics[scale=.35]{../images/fibtree} \\*
+The top number is the 4th fibonacci number. It's children and the 3rd and 2nd fibonacci number, and this process continues until we reach the 0th and 1st fibonacci numbers. 
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+ \subsection{Tree Diggers}
+ Write a function that, given a tree, will find the height (the root is at the 0th height) of it and see if there is a node in the tree that is equal to it. You are limited to making one pass through the tree, meaning you cannot visit the vertices more than once.
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\newpage
+\section{Solutions}
+\subsection{FunRuntime}
+Find the runtime of the following function in terms of n.
+\begin{lstlisting}[language = Python]
+def fun(n):
+	count = n
+	while(n > 0):
+	     n-=1
+	return fun(count-1)
+\end{lstlisting}
 \begin{solution}
 This runs in $\Theta(n^{2})$. We do a total of n recursive calls, and we are upper bounded by n work per call. You may be wondering how we're getting $n^{2}$ as it intuitively just seems like less. Well we do n work in the first call, n -1 in the second... and 1 in the last. So if we rewrite this we can get n+n-1+...1 = 1+2+...n-1+n = $n^{2}$ by identity.
 \end{solution}
@@ -126,4 +222,47 @@ def fib(n):
 \end{lstlisting}
 This solution uses a technique called caching. Instead of throwing away the data you've used, you store it. This way, you have a significantly less number of calls to your function.
 \end{solution}
+\subsection{FibTree}
+As you can tell, we are obsessed with the Fibonacci sequence. As a result, we will attempt to create a Fibonacci tree as follows: \\*
+\bigskip
+The argument passed in will be n, which refers to the nth fibonacci number. We want each number below a node to be the two numbers that compose it. For example, for n = 4 we have \\*
+\includegraphics[scale=.35]{../images/fibtree} \\*
+The top number is the 4th fibonacci number. It's children and the 3rd and 2nd fibonacci number, and this process continues until we reach the 0th and 1st fibonacci numbers. 
+\begin{solution}
+\begin{lstlisting}[language = Python]
+def fibTree(n):
+    if( n < 2):
+        return Tree(n)
+    else:
+        left = fibTree(n-1)
+        right = fibTree(n - 2)
+        return Tree(left.entry + right.entry, [left, right])
+\end{lstlisting}
+We do the same thing as normal fibonacci, except we recursive create a tree while doing so. The major difficulty was probably wrapping your head around the tree abstraction. 
+\end{solution}
+ \subsection{Tree Diggers}
+ Write a function that, given a tree, will find the height (the root is at the 0th height) of it and see if there is a node in the tree that is equal to it. You are limited to making one pass through the tree, meaning you cannot visit the vertices more than once.
+ \begin{solution}
+ \begin{lstlisting}[language = Python]
+def treeDepth(t):
+    i = 0
+    l = []
+    deepness = depth(t, 0, l)
+    while(i < len(l)):
+        if(l[i] == deepness):
+            return True
+        else:
+            return False
+
+def depth(t, count=0, l=[]):
+        l += [t.entry]
+        if(not t.branches):
+            return count
+        lst = []
+        for b in t.branches:
+            lst+=[depth(b,count+1,l)]
+        return max(lst)
+\end{lstlisting}
+We utilized a helper function to find the depth of the tree. We passed in a list as an argument, and since we modified the same list throughout our tree traversal, the object in our initial class had all the modification. From here we simply go through our list and see if any values match with out tree values.
+ \end{solution}
 \end{document}
